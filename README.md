@@ -1,7 +1,7 @@
 # TellMeTele:
 ###### What's <b>POP</b>pin tv!
 
-A tv and movie searching app that helps you find and review details about the most popular tv shows. Based on data from
+A tv searching app that helps you find and review details about the most popular tv shows. Based on data from
   [The MovieDb](https://developers.themoviedb.org/3/getting-started) API.
 
 ---
