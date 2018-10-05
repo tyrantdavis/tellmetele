@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'inquiries/index'
   get 'tvs/index'
   get 'tvs/show'
   get 'welcome/index'
