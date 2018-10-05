@@ -4,8 +4,8 @@ RSpec.describe "welcome/index.html.erb", type: :view do
 
     describe "GET #index" do
       it "renders the Welcome template" do
-        render
-        expect(rendered).to match /Welcome/
+        render :template => "welcome/index"
+        expect(rendered).to match /Tvs' Most Popular/
       end
     end
 
