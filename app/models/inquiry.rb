@@ -6,7 +6,7 @@ class Inquiry < ApplicationRecord
   format :json
 
   def Inquiry.about(expression, page)
-    get("/search/multi", query: {query: expression, page: page})
+    get("/search/tv", query: {query: expression, page: page})
   end
 
 end
