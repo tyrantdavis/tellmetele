@@ -6,10 +6,34 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'tellMeTele.ico' %>
   </head>
 
   <body>
+    <!-- Navbar (sit on top) -->
+    <header class="w3-top w3-container-fluid w3-card w3-white">
+      <nav class="w3-bar " id="myNavbar">
+        <%= link_to 'TellMeTele', root_path, class: 'w3-bar-item w3-button w3-wide w3-hover-white w3-hover-text-green'  %>
+        <section class="w3-right">
+          <!-- Add path -->
+          <%= link_to 'More Shows', "#", class: 'w3-bar-item w3-button w3-wide w3-hover-white w3-hover-text-green'  %>
+        </section>
+        <section>
+            <%= form_tag(inquiries_index_path, method: "get", class: "w3-input  w3-center w3-padding") do %>
+              <%= text_field_tag(:query, params[:query], {placeholder: "Search TV...", class: "w3-center"}) %>
+              <% submit_tag("Search") %>
+              <%= button_tag("Search", class: "w3-button-small w3-green w3-hover-white") %>
+            <% end %>
+        </section>
+      </nav>
+    </header>
+    </br>
+    <article class="w3-container w3-margin-top">
+
+
     <%= yield %>
+    </article>
   </body>
 </html>
