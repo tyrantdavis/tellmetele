@@ -1,11 +1,16 @@
- <h1>Inquiry Results</h1>
-  <p><%= results_total.nil? ? "Results: 0" : "Results: " + results_total.to_s %></p>
-  <p><%= "Total pages: #{pg_total}"%></p>
+<h1 class="w3-center">Inquiry Results</h1>
+
+<p><b><%= results_total.nil? ? "Results: 0" : "Results: " + results_total.to_s %></b></p>
+<p><%= "Total pages: #{pg_total}"%></p>
 
 <% if parsed_inquiry['total_results'].eql?(0) %>
-  <p><%= "Invalid input. No results found for #{probe}" %></p>
+  <p w3-bold>
+    <b><%= "Invalid input." %></b>
+    <%= " No results found for " %>
+    <b class="w3-bold"><%= "#{probe}" %></b>
+  </p>
 <% elsif parsed_inquiry['total_results'].nil?%>
-  <p><%= "Empty input. " + parsed_inquiry['errors'][0].capitalize + "." %></p>
+  <p><b><%= "Empty input. " + parsed_inquiry['errors'][0].capitalize + "." %></b></p>
 <% else %>
   <%= inquiry_results %>
 <% end %>
