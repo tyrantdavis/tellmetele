@@ -1,2 +1,11 @@
-<h1>Inquiries#index</h1>
-<p>Find me in app/views/inquiries/index.html.erb</p>
+ <h1>Inquiry Results</h1>
+  <p><%= results_total.nil? ? "Results: 0" : "Results: " + results_total.to_s %></p>
+  <p><%= "Total pages: #{pg_total}"%></p>
+
+<% if parsed_inquiry['total_results'].eql?(0) %>
+  <p><%= "Invalid input. No results found for #{probe}" %></p>
+<% elsif parsed_inquiry['total_results'].nil?%>
+  <p><%= "Empty input. " + parsed_inquiry['errors'][0].capitalize + "." %></p>
+<% else %>
+  <%= inquiry_results %>
+<% end %>
