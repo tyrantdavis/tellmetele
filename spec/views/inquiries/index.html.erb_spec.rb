@@ -45,14 +45,16 @@ RSpec.describe "inquiries/index.html.erb", type: :view do
       end
 
       describe "Errors: matching error message with string" do
-        context "Invalid returns: Invalid input. No results found for sfhdshfhshshjshhs; " do
-          expect { invalid_expression_parsed_inquiry.raise StandardError, "Invalid input. No results found for sfhdshfhshshjshhs;" }.
-          to raise_error(StandardError, "Invalid input. No results found for sfhdshfhshshjshhs;")
+        context "Invalid query returns: Error: Invalid input. Please try again. And includes msg ' 0 found for sfhdshfhshshjshhs '; " do
+          expect { invalid_expression_parsed_inquiry.raise StandardError, "Error: Invalid input. Please try again." }.
+          to raise_error(StandardError, "Error: Invalid input. Please try again.").
+          and include("0 found for sfhdshfhshshjshhs;")
         end
 
-        context "Empty returns: Empty input. Query must be provided. " do
-          expect { empty_expression_parsed_inquiry.is_expected.to contain_exactly("Empty input. Query must be provided.") }.
-          to raise_error(StandardError, "Empty input. Query must be provided.")
+        context "Empty query returns: Error: Empty input. Query must be provided. Includes Results: 0 " do
+          expect { empty_expression_parsed_inquiry.is_expected.to contain_exactly("Error: Empty input. Query must be provided.") }.
+          to raise_error(StandardError, "Empty input. Query must be provided.").
+          and include("Results: 0")
         end
       end
 

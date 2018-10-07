@@ -1,16 +1,15 @@
 <h1 class="w3-center">Inquiry Results</h1>
-
-<p><b><%= results_total.nil? ? "Results: 0" : "Results: " + results_total.to_s %></b></p>
-<p><%= "Total pages: #{pg_total}"%></p>
-
+<!-- Print  results total -->
+<p>
+  <%= results_total.nil? ? "Results: 0" : "Results: " + results_total.to_s + " for " %>
+  <span class="w3-bold"><%= "#{probe}" %></span>
+</p>
+<!-- Print Error msg for empty input || invalid input -->
 <% if parsed_inquiry['total_results'].eql?(0) %>
-  <p w3-bold>
-    <b><%= "Invalid input." %></b>
-    <%= " No results found for " %>
-    <b class="w3-bold"><%= "#{probe}" %></b>
-  </p>
+  <p class="w3-bold w3-xxlarge"><%= "Error: Invalid input. Please try again." %></p>
 <% elsif parsed_inquiry['total_results'].nil?%>
-  <p><b><%= "Empty input. " + parsed_inquiry['errors'][0].capitalize + "." %></b></p>
+  <p class="w3-xxlarge w3-bold"><%= "Error: Empty input. " + parsed_inquiry['errors'][0].capitalize + "." %></p>
 <% else %>
+<!-- Resulting data -->
   <%= inquiry_results %>
 <% end %>
