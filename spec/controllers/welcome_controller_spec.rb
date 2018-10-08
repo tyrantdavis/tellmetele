@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe WelcomeController, type: :controller do
     let (:popular) {Tv.get_popular_shows['results'].take(9)}
-    let(:big_bang) {Tv.get_popular_shows['results'][0]['original_name']}
+    let(:big_bang) {Tv.get_popular_shows['results'][1]['original_name']}
 
 
   describe "GET #index" do
@@ -24,7 +24,7 @@ RSpec.describe WelcomeController, type: :controller do
     end
 
     it "returns show data as a Hash" do
-      expect(popular[0]).to be_a(Hash)
+      expect(popular[1]).to be_a(Hash)
     end
 
     it "returns the The Big Bang Theory" do
