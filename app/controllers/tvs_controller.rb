@@ -29,7 +29,7 @@ class TvsController < ApplicationController
     if response_status_code.eql?(34)
       error_msg = "Error: The show you are looking for was not foud. "
     else
-      tv_show_name = tv_details["name"] || tv_details["original_name"]
+      tv_show_name = tv_details["original_name"] || tv_details["name"]
       backdrop_image = tv_details["backdrop_path"]
       poster_image = tv_details["poster_path"]
       genre = tv_details["genres"][0]["name"]
@@ -54,6 +54,7 @@ class TvsController < ApplicationController
       overview: overview,
       vote_avg: vote_avg,
       tv_show_link: tv_show_link,
+      tv_show_name: tv_show_name,
       response_status_code: response_status_code,
       error_msg: error_msg
     }
