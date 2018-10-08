@@ -2,19 +2,41 @@ class TvsController < ApplicationController
 
   def index
 
-    pg = params[:page].nil? || params[:page].eql?(0) ? 1 : params[:page].to_i
+    current_page = params[:page].nil? || params[:page].eql?(0) ? 1 : params[:page].to_i
+    per_page = params[:per_page] = 20
+    total = params[:total_entries]
+    model = params[:model] = "TV Shows"
     sort_list = params[:sort]
     sort_list || sort_list = "popularity.desc"
-    tvs_object = Tv.get_all_shows(pg, sort_list)
+    tvs_object = Tv.get_all_shows(current_page, sort_list)
     tv_shows = tvs_object['results']
+    total_results = tvs_object["total_results"]
     total_pages = tvs_object['total_pages']
+    collection = (1..total_pages).to_a
+    paginated_collection = collection.paginate(current_page, per_page)
+
+    # Sets min and max items display numbers
+    previous_label = params[:previous_label] = "<< [ Previous ]"
+    next_label = params[:next_label] = "[ Next ] >>"
+    min_item_number = current_page * per_page
+    max_item_number = min_item_number - 19
 
     render :index, locals: {
-      pg: pg,
+      current_page: current_page,
+      per_page: per_page,
+      model: model,
       sort_list: sort_list,
       tvs_object: tvs_object,
       tv_shows: tv_shows,
       total_pages: total_pages,
+      total_results: total_results,
+      collection: collection,
+      total: total,
+      paginated_collection: paginated_collection,
+      min_item_number: min_item_number,
+      max_item_number: max_item_number,
+      previous_label: previous_label,
+      next_label: next_label
     }
   end
 
