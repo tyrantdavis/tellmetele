@@ -1,2 +1,16 @@
-<h1>Tvs#show</h1>
-<p>Find me in app/views/tvs/show.html.erb</p>
+<h1 class="w3-center">TV Show Details</h1>
+<% if error_msg %>
+  <p class="w3-xxlarge w3-bold"><%= error_msg %></p>
+  <p><%= link_to "Leave", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
+<% else %>
+  <p><%= backdrop_image %></p>
+  <p><%= poster_image%></p>
+  <p><%= genre %></p>
+  <p><%= network_name %></p>
+  <p><%= network_logo %></p>
+  <p><%= number_of_seasons %></p>
+  <p><%= network_name %></p>
+  <p><%= overview %></p>
+  <p><%= vote_avg%></p>
+  <p><%= tv_show_link %></p>
+<% end %>
