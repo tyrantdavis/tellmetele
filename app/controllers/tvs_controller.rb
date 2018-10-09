@@ -58,13 +58,13 @@ class TvsController < ApplicationController
       tv_show_name = tv_details["original_name"] || tv_details["name"]
       backdrop_image = tv_details["backdrop_path"]
       poster_image = tv_details["poster_path"]
-      genre = tv_details["genres"][0]["name"] if genre
-      network_name = tv_details["networks"][0]["name"] if network_name
-      network_logo = tv_details["networks"][0]["logo_path"] if network_logo
-      number_of_seasons = tv_details["number_of_seasons"] if number_of_seasons
-      overview = tv_details["overview"] if overview
-      vote_avg = tv_details["vote_average"] if vote_avg
-      tv_show_link = tv_details["homepage"] if tv_show_link
+      # genre = tv_details["genres"][0]["name"] if genre
+      # network_name = tv_details["networks"][0]["name"] if network_name
+      # network_logo = tv_details["networks"][0]["logo_path"] if network_logo
+      # number_of_seasons = tv_details["number_of_seasons"] if number_of_seasons
+      # overview = tv_details["overview"] if overview
+      # vote_avg = tv_details["vote_average"] if vote_avg
+      # tv_show_link = tv_details["homepage"] if tv_show_link
     end
 
 
@@ -74,14 +74,14 @@ class TvsController < ApplicationController
       error: error,
       backdrop_image: backdrop_image,
       poster_image: poster_image,
-      genre: genre,
-      network_name: network_name,
-      network_logo: network_logo,
-      number_of_seasons: number_of_seasons,
-      overview: overview,
-      vote_avg: vote_avg,
-      tv_show_link: tv_show_link,
-      tv_show_name: tv_show_name,
+      # genre: genre,
+      # network_name: network_name,
+      # network_logo: network_logo,
+      # number_of_seasons: number_of_seasons,
+      # overview: overview,
+      # vote_avg: vote_avg,
+      # tv_show_link: tv_show_link,
+      # tv_show_name: tv_show_name,
       response_status_code: response_status_code,
       error_msg: error_msg
     }

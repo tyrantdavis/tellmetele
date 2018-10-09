@@ -1,17 +1,29 @@
 <h1 class="w3-center">TV Show Details</h1>
-<% if error_msg %>
+<% if response_status_code.eql?(34) || tv_details.nil? || error || response.headers.eql?("None") %>
   <p class="w3-xxlarge w3-bold"><%= error_msg %></p>
   <p><%= link_to "Leave", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
 <% else %>
-  <p><%= tv_show_name %></p>
-  <p><%= backdrop_image %></p>
-  <p><%= poster_image%></p>
-  <p><%= genre %></p>
-  <p><%= network_name %></p>
-  <p><%= network_logo %></p>
-  <p><%= number_of_seasons %></p>
-  <p><%= network_name %></p>
-  <p><%= overview %></p>
-  <p><%= vote_avg%></p>
-  <p><%= tv_show_link %></p>
+<div class = " w3-container w3-row">
+  <h2 class="w3-center"><%= "#{tv_details['original_name']}" %></h2>
+  <section class = "w3-center w3-col s7" style="width:max-width">
+
+    <%= image_tag("https://image.tmdb.org/t/p/w500/#{tv_details['poster_path']}", :alt => "Image of #{tv_details['original_name']}") if !tv_details['poster_path'].nil? %>
+  </section>
+    <% if response_status_code.eql?(nil) || !tv_details || tv_details.nil? || tv_details.empty? %>
+    <h2><% "Something went wrong" %></h2>
+    <aside class="w3-col s5 w3-left">
+      <p><%#= tv_details['status'] %></p>
+      <p class="w3-bold"><%= "Vote Avg: #{tv_details['vote_average']}" %></p>
+      <p class="w3-bold"><%= "Network: #{tv_details["networks"][0]["name"]}" %></p>
+      <p class="w3-bold"><%= "Seasons: #{tv_details["number_of_seasons"]}" %></p>
+
+      <% else %>
+        <%= "No additional info." %>
+      <% end %>
+
+    </aside>
+    <article>
+      <p class="w3-justify"><%= tv_details["overview"] %></p>
+    </article>
+</div>
 <% end %>
