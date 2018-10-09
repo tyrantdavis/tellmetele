@@ -4,20 +4,21 @@ class TvsController < ApplicationController
 
     current_page = params[:page].nil? || params[:page].eql?(0) ? 1 : params[:page].to_i
     per_page = params[:per_page] = 20
-    total = params[:total_entries]
+    total_entries = params[:total_entries]
     model = params[:model] = "TV Shows"
     sort_list = params[:sort]
     sort_list || sort_list = "popularity.desc"
     tvs_object = Tv.get_all_shows(current_page, sort_list)
     tv_shows = tvs_object['results']
     total_results = tvs_object["total_results"]
+    # Pagination
     total_pages = tvs_object['total_pages']
     collection = (1..total_pages).to_a
     paginated_collection = collection.paginate(current_page, per_page)
 
     # Sets min and max items display numbers
-    previous_label = params[:previous_label] = "<< [ Previous ]"
-    next_label = params[:next_label] = "[ Next ] >>"
+    previous_label = params[:previous_label] = "&#187; Previous "
+    next_label = params[:next_label] = " Next &#171;"
     min_item_number = current_page * per_page
     max_item_number = min_item_number - 19
 
@@ -31,7 +32,7 @@ class TvsController < ApplicationController
       total_pages: total_pages,
       total_results: total_results,
       collection: collection,
-      total: total,
+      total_entries: total_entries,
       paginated_collection: paginated_collection,
       min_item_number: min_item_number,
       max_item_number: max_item_number,
