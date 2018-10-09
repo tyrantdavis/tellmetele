@@ -9,6 +9,7 @@ class TvsController < ApplicationController
     sort_list = params[:sort]
     sort_list || sort_list = "popularity.desc"
     tvs_object = Tv.get_all_shows(current_page, sort_list)
+    error_msg = tvs_object['errors']
     tv_shows = tvs_object['results']
     total_results = tvs_object["total_results"]
     # Pagination
@@ -28,9 +29,10 @@ class TvsController < ApplicationController
       model: model,
       sort_list: sort_list,
       tvs_object: tvs_object,
+      errors: error_msg,
       tv_shows: tv_shows,
-      total_pages: total_pages,
       total_results: total_results,
+      total_pages: total_pages,
       collection: collection,
       total_entries: total_entries,
       paginated_collection: paginated_collection,
@@ -45,29 +47,31 @@ class TvsController < ApplicationController
 
     tvid = params[:tvid].to_i
     tv_details = Tv.get_single_show(tvid)
+    error = tv_details['errors']
     response_status_code = tv_details["status_code"]
     error_msg = tv_details["status_message"]
 
     #Catch error and render custom msg
-    if response_status_code.eql?(34)
+    if response_status_code.eql?(34) || tv_details.nil? || error || response.headers.eql?("None")
       error_msg = "Error: The show you are looking for was not foud. "
     else
       tv_show_name = tv_details["original_name"] || tv_details["name"]
       backdrop_image = tv_details["backdrop_path"]
       poster_image = tv_details["poster_path"]
-      genre = tv_details["genres"][0]["name"]
-      network_name = tv_details["networks"][0]["name"]
-      network_logo = tv_details["networks"][0]["logo_path"]
-      number_of_seasons = tv_details["number_of_seasons"]
-      overview = tv_details["overview"]
-      vote_avg = tv_details["vote_average"]
-      tv_show_link = tv_details["homepage"]
+      genre = tv_details["genres"][0]["name"] if genre
+      network_name = tv_details["networks"][0]["name"] if network_name
+      network_logo = tv_details["networks"][0]["logo_path"] if network_logo
+      number_of_seasons = tv_details["number_of_seasons"] if number_of_seasons
+      overview = tv_details["overview"] if overview
+      vote_avg = tv_details["vote_average"] if vote_avg
+      tv_show_link = tv_details["homepage"] if tv_show_link
     end
 
 
     render :show, locals: {
       tvid: tvid,
       tv_details: tv_details,
+      error: error,
       backdrop_image: backdrop_image,
       poster_image: poster_image,
       genre: genre,

@@ -1,2 +1,6 @@
 <h1 class="w3-center">TVs' Most Popular</h1>
-<p><%= popular_shows %></p>
+<section class="w3-content">
+  <% popular_shows.each do |show| %>
+    <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']} image.", class: "poster w3-image w3-padding w3-card"), root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
+  <% end %>
+</section>

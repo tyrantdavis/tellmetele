@@ -2,25 +2,27 @@ class InquiriesController < ApplicationController
 
   def index
     probe = params[:query]
-    pg = params[:page].to_i
+    page = params[:page].to_i
     session_inquiry = params[:inquiry]
-    session_inquiry || session_inquiry = probe
+    session_inquiry || session_inquiry = params[:query]
 
     if !probe
-      probe,  pg = session_inquiry,  params[:inquiry_page]
+      probe,  page = session[:inquiry],  params[:inquiry_page]
     else
-      session_inquiry,  session_inquiry = probe,  pg
+      session[:inquiry] = session_inquiry
+      session_inquiry = probe,  page
     end
 
-    pg = 1 if pg.eql?(0)
-    parsed_inquiry = Inquiry.about(probe, pg).parsed_response
+    page = 1 if page.eql?(0)
+    parsed_inquiry = Inquiry.about(probe, page)
     pg_total = parsed_inquiry['total_pages']
     results_total = parsed_inquiry['total_results']
     inquiry_results = parsed_inquiry['results']
-
+    errors = parsed_inquiry['errors']
     render :index, locals: {
       probe: probe,
-      pg: pg,
+      page: page,
+      errors: errors,
       session_inquiry: session_inquiry,
       parsed_inquiry: parsed_inquiry,
       pg_total: pg_total,
