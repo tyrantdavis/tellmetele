@@ -15,10 +15,6 @@
         <% end %>
 <% end %>
 </section class="w3-center w3-bar w3-border-round w3-top">
-  <!-- Pagination buggy and not render correctly. -->
-  <!-- <section class="w3-center w3-container"> -->
-    <!-- <p><%#= will_paginate paginated_collection %>      </p> -->
-    <!-- <p><%#= page_entries_info paginated_collection %></p> -->
     <% if pg_total > 1 %>
       <p><%= link_to "Back", root_url + 'inquiries/index?' + {page: previous_page, param: "popularity.desc" }.to_param, class: "w3-btn w3-bar-item", method: :get if previous_page %></p>
       <p><%= link_to "Next", root_url + 'inquiries/index?' + {page: next_page, param: "popularity.desc" }.to_param, class: "w3-btn w3-bar-item", method: :get %></p>

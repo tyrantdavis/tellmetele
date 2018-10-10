@@ -28,9 +28,6 @@ class InquiriesController < ApplicationController
 
     results_total = parsed_inquiry['total_results']
     inquiry_results = parsed_inquiry['results']
-    # will_paginate collection buggy.
-    # collection = (1..pg_total).to_a
-    # paginated_collection = collection.paginate(page, per_page)
     render :index, locals: {
       probe: probe,
       page: page,
@@ -45,7 +42,6 @@ class InquiriesController < ApplicationController
       inquiry_results: inquiry_results,
       next_page: next_page,
       previous_page: previous_page
-      # paginated_collection: paginated_collection
     }
   end
 end
