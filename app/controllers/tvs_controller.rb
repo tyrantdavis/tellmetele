@@ -8,7 +8,13 @@ class TvsController < ApplicationController
     model = params[:model] = "TV Shows"
     sort_list = params[:sort]
     sort_list || sort_list = "popularity.desc"
+
     tvs_object = Tv.get_all_shows(current_page, sort_list)
+    response_status_code = tvs_object["status_code"]
+    errors = tvs_object['errors']
+
+    error_msg = "Something went wrong. I'm bugging out" if response_status_code.eql?(34) || tvs_object.nil? || errors || response.headers.eql?("None")
+
     error_msg = tvs_object['errors']
     tv_shows = tvs_object['results']
     total_results = tvs_object["total_results"]
@@ -16,30 +22,20 @@ class TvsController < ApplicationController
     total_pages = tvs_object['total_pages']
     collection = (1..total_pages).to_a
     paginated_collection = collection.paginate(current_page, per_page)
-
-    # Sets min and max items display numbers
-    previous_label = params[:previous_label] = "&#187; Previous "
-    next_label = params[:next_label] = " Next &#171;"
-    min_item_number = current_page * per_page
-    max_item_number = min_item_number - 19
-
     render :index, locals: {
       current_page: current_page,
       per_page: per_page,
       model: model,
       sort_list: sort_list,
       tvs_object: tvs_object,
-      errors: error_msg,
+      errors: errors,
+      error_msg: error_msg,
       tv_shows: tv_shows,
       total_results: total_results,
       total_pages: total_pages,
       collection: collection,
       total_entries: total_entries,
-      paginated_collection: paginated_collection,
-      min_item_number: min_item_number,
-      max_item_number: max_item_number,
-      previous_label: previous_label,
-      next_label: next_label
+      paginated_collection: paginated_collection
     }
   end
 
@@ -47,43 +43,29 @@ class TvsController < ApplicationController
 
     tvid = params[:tvid].to_i
     tv_details = Tv.get_single_show(tvid)
-    error = tv_details['errors']
     response_status_code = tv_details["status_code"]
-    error_msg = tv_details["status_message"]
-
+    errors = tv_details['errors']
     #Catch error and render custom msg
-    if response_status_code.eql?(34) || tv_details.nil? || error || response.headers.eql?("None")
-      error_msg = "Error: The show you are looking for was not foud. "
-    else
-      tv_show_name = tv_details["original_name"] || tv_details["name"]
-      backdrop_image = tv_details["backdrop_path"]
-      poster_image = tv_details["poster_path"]
-      # genre = tv_details["genres"][0]["name"] if genre
-      # network_name = tv_details["networks"][0]["name"] if network_name
-      # network_logo = tv_details["networks"][0]["logo_path"] if network_logo
-      # number_of_seasons = tv_details["number_of_seasons"] if number_of_seasons
-      # overview = tv_details["overview"] if overview
-      # vote_avg = tv_details["vote_average"] if vote_avg
-      # tv_show_link = tv_details["homepage"] if tv_show_link
-    end
+    error_msg = "The show requested could not be found. I'm bugging out! " if response_status_code.eql?(34) || tv_details.nil? || errors || response.headers.eql?("None")
 
 
+    tv_show_name = tv_details["original_name"] || tv_details["name"]
+    backdrop_image = tv_details["backdrop_path"]
+    poster_image = tv_details["poster_path"],
+    vote_average = tv_details['vote_average']
+    network = tv_details["networks"][0]["name"]
+    seasons = tv_details["number_of_seasons"]
     render :show, locals: {
       tvid: tvid,
       tv_details: tv_details,
-      error: error,
+      errors: errors,
       backdrop_image: backdrop_image,
       poster_image: poster_image,
-      # genre: genre,
-      # network_name: network_name,
-      # network_logo: network_logo,
-      # number_of_seasons: number_of_seasons,
-      # overview: overview,
-      # vote_avg: vote_avg,
-      # tv_show_link: tv_show_link,
-      # tv_show_name: tv_show_name,
       response_status_code: response_status_code,
-      error_msg: error_msg
+      error_msg: error_msg,
+      vote_average: vote_average,
+      network: network,
+      seasons: seasons
     }
   end
 end

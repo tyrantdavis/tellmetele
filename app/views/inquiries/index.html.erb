@@ -1,39 +1,27 @@
 <h1 class="w3-center">Inquiry Results</h1>
-<% if inquiry_results.nil? || inquiry_results.empty? %>
-    <p><%= "No results found." %></p>
-    <p><%= link_to "Leave", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
+<% if error_msg %>
+    <p class="w3-bold w3-xxlarge"><%= error_msg %></p>
+    <p><%= link_to "Back", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
 <% else %>
     <section class="w3-content w3-continer">
     <% inquiry_results.each do |show| %>
-          <% if show['poster_path'] %>
+        <% if show['poster_path'] %>
             <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']}.", class: "poster w3-image w3-padding w3-card-4"),  root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
           <% else %>
           <section class="w3-container w3-display-container">
             <%= link_to image_tag("no-image.png", :alt => "No Image Available."), root_url + 'tvs/show?' + {tvid: show['id']}.to_param, class:"", method: :get  %>
             <div class=""><%= "#{show['original_name']}" %></div>
           </section>
-
-          <% end %>
+        <% end %>
+<% end %>
+</section class="w3-center w3-bar w3-border-round w3-top">
+  <!-- Pagination buggy and not render correctly. -->
+  <!-- <section class="w3-center w3-container"> -->
+    <!-- <p><%#= will_paginate paginated_collection %>      </p> -->
+    <!-- <p><%#= page_entries_info paginated_collection %></p> -->
+    <% if pg_total > 1 %>
+      <p><%= link_to "Back", root_url + 'inquiries/index?' + {page: previous_page, param: "popularity.desc" }.to_param, class: "w3-btn w3-bar-item", method: :get if previous_page %></p>
+      <p><%= link_to "Next", root_url + 'inquiries/index?' + {page: next_page, param: "popularity.desc" }.to_param, class: "w3-btn w3-bar-item", method: :get %></p>
     <% end %>
   </section>
 <% end %>
-<!-- Print  results total -->
-<!-- <p>
-  <%#= results_total.nil? ? "Results: 0" : "Results: " + results_total.to_s + " for " %>
-  <span class="w3-bold"><%#= "#{probe}" %></span>
-</p>
-<!-- Print Error msg for empty input || invalid input -->
-<%# if parsed_inquiry['total_results'].eql?(0) %>
-  <p class="w3-bold w3-xxlarge"><%#= "Error: Invalid input. Please try again." %></p>
-<%# elsif parsed_inquiry['total_results'].nil?%>
-  <p class="w3-xxlarge w3-bold"><%#= "Error: Empty input. " + parsed_inquiry['errors'][0].capitalize + "." %></p>
-<%# else %>
-<!-- Resulting data -->
-  <%#= inquiry_results.each do | result | %>
-    <section class="w3-content">
-      <%# if result['poster_path'] %>
-      <%#  %>
-      <%# end %>
-    </section>
-    <%# end %>
-<%# end %>
