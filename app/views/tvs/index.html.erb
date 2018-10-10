@@ -1,24 +1,23 @@
 <h1 class="w3-center">More Shows</h1>
-<section class="w3-container">
-  <p><%#= tvs_object %></p>
-  <p><%= tv_shows %></p>
-  <p><%= "Results Per Page: #{tv_shows.count }"%></p>
-  <p><%= "Current Page: #{current_page}" %></p>
-  <p><%= "Per Page: #{per_page}" %></p>
-  <p><%= "Total Results: #{total_results}" %></p>
-  <p><%= "Total Entries : #{total_entries}" %></p>
-  <p><%= "Total pgs: #{  total_pages}" %></p>
-  <p><%= "Params: #{  params.inspect}" %></p>
-  <p><%#= "Collecton: #{  collection }" %></p>
+<% if !errors %>
+<section class="w3-content">
+  <% tv_shows.each do |show| %>
+    <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']} image.", class: "poster w3-image w3-padding w3-card"), root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
+  <% end %>
+
 </section>
-<!-- Pagination -->
-<section class="w3-center">
-  <%= will_paginate paginated_collection %>
-  <p>
-    <%= page_entries_info paginated_collection %>
-    <%#= "Displaying #{model}" %>
-    <!-- <span class="w3-bold"><%#= " #{max_item_number}" %></span> -->
-    <!-- <span ><%#= " - " %></span> -->
-    <!-- <span class="w3-bold"><%#= " #{min_item_number}" %></span> -->
-  </p>
-</section>
+  <!-- Pagination -->
+  <section class="w3-center w3-container">
+    <p><%= will_paginate paginated_collection %>      </p>
+
+    <p>
+      <%= page_entries_info paginated_collection %>
+      <%#= "Displaying #{model}" %>
+      <!-- <span class="w3-bold"><%#= " #{max_item_number}" %></span> -->
+      <!-- <span ><%#= " - " %></span> -->
+      <!-- <span class="w3-bold"><%#= " #{min_item_number}" %></span> -->
+    </p>
+  </section>
+  <% else %>
+  <%= "There was a problem." %>
+<% end %>
