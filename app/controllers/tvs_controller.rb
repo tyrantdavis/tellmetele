@@ -21,7 +21,7 @@ class TvsController < ApplicationController
     # Pagination
     total_pages = tvs_object['total_pages']
     collection = (1..total_pages).to_a
-    paginated_collection = collection.paginate(current_page, per_page)
+    @paginated_collection = collection.paginate(current_page, per_page)
     render :index, locals: {
       current_page: current_page,
       per_page: per_page,
@@ -35,7 +35,7 @@ class TvsController < ApplicationController
       total_pages: total_pages,
       collection: collection,
       total_entries: total_entries,
-      paginated_collection: paginated_collection
+      # paginated_collection: paginated_collection
     }
   end
 
