@@ -4,7 +4,10 @@
     <% tv_shows.each do |show| %>
       <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']} image.", class: "poster w3-image w3-padding w3-card"), root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
     <% end %>
+    <!-- Pagination -->
+    <%= render partial: 'shared/pagination' %>
+<% else %>
+    <p class="w3-bold w3-xxlarge"><%= error_msg %></p>
+    <p><%= link_to "Back", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
   </section>
-  <!-- Pagination -->
-<%= render partial: 'shared/pagination' %>
 <% end %>
