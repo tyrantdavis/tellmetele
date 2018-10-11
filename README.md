@@ -31,7 +31,7 @@ I also considered Sinatra for it's simplicity. I found it too simplistic for my 
 
 ### Architecture
 * RoR 5.2.1
-* Ruby 2.3.3
+* Ruby ruby '~> 2.5.1'
 * W3CSS - Rails
 * Figaro
 * httparty
