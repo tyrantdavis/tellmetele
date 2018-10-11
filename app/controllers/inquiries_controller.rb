@@ -21,9 +21,9 @@ class InquiriesController < ApplicationController
     parsed_inquiry = Inquiry.about(probe, page)
     errors = parsed_inquiry['errors']
     response_status_code = parsed_inquiry["status_code"]
-    pg_total = parsed_inquiry['total_pages']
+    pg_total = parsed_inquiry['total_pages'] || 2
     collection = (1..pg_total).to_a
-    paginated_collection = collection.paginate(page, per_page)
+    @paginated_collection = collection.paginate(page, per_page)
 
     error_msg = "Oops. Invalid or empty input." if response_status_code.eql?(34) || parsed_inquiry.nil? || errors || response.headers.eql?("None") || parsed_inquiry['results'].empty?
 
@@ -42,7 +42,6 @@ class InquiriesController < ApplicationController
       response_status_code: response_status_code,
       pg_total: pg_total,
       collection: collection,
-      paginated_collection: paginated_collection,
       results_total: results_total,
       inquiry_results: inquiry_results,
       next_page: next_page,
