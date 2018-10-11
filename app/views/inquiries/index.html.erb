@@ -17,8 +17,5 @@
 </section>
 <!-- New Section -->
 <!-- Pagination -->
-<section class="w3-center w3-container">
-  <p><%= will_paginate paginated_collection %>      </p>
-  <p><%= page_entries_info paginated_collection %></p>
-</section>
+<%= render partial: 'shared/pagination' %>
 <% end %>
