@@ -5,7 +5,7 @@
 <% else %>
     <section class="w3-content w3-continer">
     <% inquiry_results.each do |show| %>
-        <% if show['poster_path'] %>
+      <% if show['poster_path'] %>
             <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']}.", class: "poster w3-image w3-padding w3-card-4"),  root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
           <% else %>
           <section class="w3-container w3-display-container">
@@ -14,10 +14,11 @@
           </section>
         <% end %>
 <% end %>
-</section class="w3-center w3-bar w3-border-round w3-top">
-    <% if pg_total > 1 %>
-      <p><%= link_to "Back", root_url + 'inquiries/index?' + {page: previous_page, param: "popularity.desc" }.to_param, class: "w3-btn w3-bar-item", method: :get if previous_page %></p>
-      <p><%= link_to "Next", root_url + 'inquiries/index?' + {page: next_page, param: "popularity.desc" }.to_param, class: "w3-btn w3-bar-item", method: :get %></p>
-    <% end %>
-  </section>
+</section>
+<!-- New Section -->
+<!-- Pagination -->
+<section class="w3-center w3-container">
+  <p><%= will_paginate paginated_collection %>      </p>
+  <p><%= page_entries_info paginated_collection %></p>
+</section>
 <% end %>
