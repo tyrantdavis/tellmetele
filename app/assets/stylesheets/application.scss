@@ -14,8 +14,27 @@
  *= require_tree .
  *= require_self
  */
-
+// create w3-bold class
 .w3-bold { font-weight: bold;}
 a {
   text-decoration: none;
+}
+// Default class name for will_paginate view template helpers
+.pagination a {
+    text-decoration: none;
+}
+
+// render active link as a card
+.current {
+  background-color: #4CAF50;
+  font-size: 21px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  text-align: center;
+  padding: 3px 12px;
+  color: white;
+}
+
+//  overides default green
+.w3-green {
+  background-color: #4CAF50 !important;
 }
