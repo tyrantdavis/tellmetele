@@ -48,13 +48,13 @@ class TvsController < ApplicationController
     #Catch error and render custom msg
     error_msg = "The show requested could not be found. I'm bugging out! " if response_status_code.eql?(34) || tv_details.nil? || errors || response.headers.eql?("None")
 
-
+    no_info = "No information"
     tv_show_name = tv_details["original_name"] || tv_details["name"]
-    backdrop_image = tv_details["backdrop_path"]
-    poster_image = tv_details["poster_path"],
-    vote_average = tv_details['vote_average']
-    network = tv_details["networks"][0]["name"]
-    seasons = tv_details["number_of_seasons"]
+    backdrop_image = tv_details["backdrop_path"]  || no_info
+    poster_image = tv_details["poster_path"]  || no_info
+    vote_average = tv_details['vote_average'] || no_info
+    network = tv_details["networks"][0]["name"] || no_info
+    seasons = tv_details["number_of_seasons"] || no_info
     render :show, locals: {
       tvid: tvid,
       tv_details: tv_details,
@@ -65,7 +65,8 @@ class TvsController < ApplicationController
       error_msg: error_msg,
       vote_average: vote_average,
       network: network,
-      seasons: seasons
+      seasons: seasons,
+      no_info: no_info
     }
   end
 end
