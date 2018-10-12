@@ -53,7 +53,7 @@ class TvsController < ApplicationController
     backdrop_image = tv_details["backdrop_path"]  || no_info
     poster_image = tv_details["poster_path"]  || no_info
     vote_average = tv_details['vote_average'] || no_info
-    network = tv_details["networks"][0]["name"] || no_info
+    network = no_info || tv_details["networks"][0]["name"]
     seasons = tv_details["number_of_seasons"] || no_info
     render :show, locals: {
       tvid: tvid,
