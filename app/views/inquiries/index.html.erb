@@ -1,7 +1,11 @@
 <h1 class="w3-center">Inquiry Results</h1>
 <% if error_msg %>
     <p class="w3-bold w3-xxlarge"><%= error_msg %></p>
-    <p><%= link_to "Back", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
+    <section class="container">
+        <p><%= link_to "Back",  :back, class: 'w3-bar-item  w3-hover-green w3-btn  w3-btn-lg w3-border w3-border-green' %>
+             <%= link_to "Home",  root_url, class: 'w3-bar-item w3-hover-green w3-btn w3-btn-lg w3-border w3-border-green' %>
+        </p>
+    </section>
 <% else %>
     <section class="w3-content w3-continer">
     <% inquiry_results.each do |show| %>
@@ -15,7 +19,6 @@
         <% end %>
 <% end %>
 </section>
-<!-- New Section -->
 <!-- Pagination -->
 <%= render partial: 'shared/pagination' %>
 <% end %>
