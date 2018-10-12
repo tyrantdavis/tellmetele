@@ -11,16 +11,19 @@
     <% if error_msg %>
       <h2><% error_msg %></h2>
       <aside class="w3-col s5 w3-left">
-    <% elsif %>
-      <p class="w3-bold"><%= "Vote Avg: #{vote_average}" %></p>
-      <p class="w3-bold"><%= "Network: #{network}" %></p>
-      <p class="w3-bold"><%= "Seasons: #{seasons}" %></p>
-    <% else %>
-        <%= "No additional info." %>
-    <% end %>
+      <% elsif %>
+        <p class="w3-bold"><%= "Vote Avg: #{vote_average}" %></p>
+        <p class="w3-bold"><%= "Network: #{network}" %></p>
+        <p class="w3-bold"><%= "Seasons: #{seasons}" %></p>
+      <% else %>
+          <%= "No additional info." %>
+      <% end %>
     </aside>
     <article>
       <p class="w3-justify"><%= tv_details["overview"] %></p>
     </article>
+    <nav>
+      <p><%= link_to "Back", :back  , class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green w3-hover-green' %></p>
+    </nav>
 </div>
 <% end %>
