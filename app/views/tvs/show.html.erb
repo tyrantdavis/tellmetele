@@ -3,21 +3,15 @@
   <p class="w3-xxlarge w3-bold"><%= error_msg %></p>
   <p><%= link_to "Leave", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
 <% else %>
-<div class = " w3-container w3-row">
-  <h2 class="w3-center"><%= "#{tv_details['original_name']}" %></h2>
-  <section class = "w3-center w3-col s7" style="width:max-width">
-    <%= image_tag("https://image.tmdb.org/t/p/w500/#{tv_details['poster_path']}", :alt => "Image of #{tv_details['original_name']}") if !tv_details['poster_path'].nil? %>
-  </section>
-    <% if error_msg %>
-      <h2><% error_msg %></h2>
-      <aside class="w3-col s5 w3-left">
-      <% elsif %>
-        <p class="w3-bold"><%= "Vote Avg: #{vote_average}" %></p>
-        <p class="w3-bold"><%= "Network: #{network}" %></p>
-        <p class="w3-bold"><%= "Seasons: #{seasons}" %></p>
-      <% else %>
-          <%= "No additional info." %>
-      <% end %>
+  <div class = " w3-container w3-row">
+    <h2 class="w3-center"><%= "#{tv_details['original_name']}" %></h2>
+    <section class = "w3-center w3-col s7" style="width:max-width">
+      <%= image_tag("https://image.tmdb.org/t/p/w500/#{tv_details['poster_path']}", :alt => "Image of #{tv_details['original_name']}") if !tv_details['poster_path'].nil? %>
+    </section>
+    <aside class="w3-col s5 w3-left">
+      <p class="w3-bold"><%= "Vote Avg: #{vote_average}" %></p>
+      <p class="w3-bold"><%= "Network: #{network}" %></p>
+      <p class="w3-bold"><%= "Seasons: #{seasons}" %></p>
     </aside>
     <article>
       <p class="w3-justify"><%= tv_details["overview"] %></p>
@@ -25,5 +19,5 @@
     <nav>
       <p><%= link_to "Back", :back  , class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green w3-hover-green' %></p>
     </nav>
-</div>
+  </div>
 <% end %>
