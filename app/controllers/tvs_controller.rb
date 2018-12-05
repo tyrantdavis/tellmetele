@@ -50,12 +50,12 @@ class TvsController < ApplicationController
 
     no_info = "No information"
     tv_show_name = tv_details["original_name"] || tv_details["name"]
-    backdrop_image = tv_details["backdrop_path"]  || no_info
-    poster_image = tv_details["poster_path"]  || no_info
-    vote_average = tv_details['vote_average'] || no_info
-    # needs work - returns nil sometimes instead of no_info
-    network = tv_details["networks"][0]["name"] || no_info
-    seasons = tv_details["number_of_seasons"] || no_info
+    backdrop_image = tv_details["backdrop_path"] ? tv_details["backdrop_path"]   : no_info
+    poster_image = tv_details["poster_path"] ? tv_details["poster_path"]  : no_info
+    vote_average = tv_details['vote_average'] ? tv_details['vote_average'] : no_info
+    
+    network =   tv_details["networks"][0]["name"] ? tv_details["networks"][0]["name"]  : no_info
+    seasons = tv_details["number_of_seasons"] ? tv_details["number_of_seasons"] : no_info
     render :show, locals: {
       tvid: tvid,
       tv_details: tv_details,
