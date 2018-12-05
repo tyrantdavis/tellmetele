@@ -6,8 +6,18 @@ A tv searching app that helps you find and review details about the most popular
 
 ---
 ## Simple to use
+![image](https://user-images.githubusercontent.com/14861025/49530421-d00e5200-f87d-11e8-803b-ea1a2d72be9e.png)
 
-When you visit the app you are presented with the most popular shows. Other than that, click the link to see all tv shows, or search out a show via the search bar.
+When you visit the app you are presented with the most popular shows.  
+
+![image](https://user-images.githubusercontent.com/14861025/49530498-f92ee280-f87d-11e8-9f40-ee2d08510987.png)
+
+Click the link More Shows to see all tv shows, or search out a show via the search bar.
+
+![image](https://user-images.githubusercontent.com/14861025/49530528-06e46800-f87e-11e8-965d-4b8073691011.png)
+
+Details for each show are available by clicking on the image of the show. Click on TellMeTele in the top right corner, from any screen, to return to the homepage.
+
 ## Objective:
 
 Create a TV show discovery web app using the open-source Movie Database API.
@@ -50,17 +60,18 @@ I also considered Sinatra for it's simplicity. I found it too simplistic for my 
 
 #### User Model or Session and Params:
 
-- I chose session and params for persistent sessions and requests. An ActiveRecord model would have been overkill. 
+- I chose session and params for persistent sessions and requests. An ActiveRecord model would have been overkill.
 
-- Search Form: Whether to submit using POST or GET. I chose Get because it is best practices and it allows  adding functionality for users i.e a bookmarking or review capabilities. 
+- Search Form: Whether to submit using POST or GET. I chose Get because it is best practices and it allows  adding functionality for users i.e a bookmarking or review capabilities.
 
 - POST action could have resulted in the search terms not applying to subsequent pages.  
 
 - Caching is another benefit of GET. Browsers and proxies cache content readily.
 
 ### Pagination:
+![image](https://user-images.githubusercontent.com/14861025/49530515-0055f080-f87e-11e8-9809-b210150dfe25.png)
 - Use active record or not:
-- I was reluctant to use will paginate considering ActiveRecord was not used for this app. The documentation convinced me otherwise however. I discovered that I could use will_paginate-collection on any array passed in for the same results. Whaaaat! Sign me up. 
+- I was reluctant to use will paginate considering ActiveRecord was not used for this app. The documentation convinced me otherwise however. I discovered that I could use will_paginate-collection on any array passed in for the same results. Whaaaat! Sign me up.
 
 I was torn between offset pagination and cursor based pagination. I chose offset because it was easier to implement.
 
@@ -74,7 +85,7 @@ What I would do differently:
 - Added Movies
 - Different styling
 - Would have gone with a vivid color pattern
-- Black UI 
+- Black UI
 - More tests
 - Enhanced search functionality
 - Added music to the homepage
