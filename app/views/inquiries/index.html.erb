@@ -10,10 +10,10 @@
     <section class="w3-content w3-continer">
     <% inquiry_results.each do |show| %>
       <% if show['poster_path'] %>
-            <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']}.", class: "poster w3-image w3-padding w3-card-4"),  root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
+            <%= link_to image_tag("https://image.tmdb.org/t/p/w200/#{show['poster_path']}", :alt => "#{show['original_name']}.", class: "poster w3-image w3-padding w3-card"),  root_url + 'tvs/show?' + {tvid: show['id']}.to_param, method: :get %>
           <% else %>
           <section class="w3-container w3-display-container">
-            <%= link_to image_tag("no-image.png", :alt => "No Image Available."), root_url + 'tvs/show?' + {tvid: show['id']}.to_param, class:"", method: :get  %>
+            <%= link_to image_tag("no-image.png", :alt => "No Image Available."), root_url + 'tvs/show?' + {tvid: show['id']}.to_param, class:"w3-card", method: :get  %>
             <div class=""><%= "#{show['original_name']}" %></div>
           </section>
         <% end %>
