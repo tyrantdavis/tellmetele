@@ -1,21 +1,22 @@
-<h1 class="w3-center">TV Show Details</h1>
+<h1 class="w3-center w3-opacity">TV Show Details</h1>
 <% if error_msg %>
   <p class="w3-xxlarge w3-bold"><%= error_msg %></p>
   <p><%= link_to "Leave", tvs_index_path, class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green' %></p>
 <% else %>
   <div class = " w3-container w3-row">
-    <h2 class="w3-center"><%= "#{tv_details['original_name']}" %></h2>
+
     <section class = "w3-center w3-col s7" style="width:max-width">
-      <%= image_tag("https://image.tmdb.org/t/p/w500/#{tv_details['poster_path']}", :alt => "Image of #{tv_details['original_name']}") if !tv_details['poster_path'].nil? %>
+      <%= image_tag("https://image.tmdb.org/t/p/w500/#{tv_details['poster_path']}", class: "w3-card", :alt => "Image of #{tv_details['original_name']}") if !tv_details['poster_path'].nil? %>
     </section>
     <aside class="w3-col s5 w3-left">
+      <header class="w3-container  w3-center w3-white w3-borde w3-border-gree"><h2 class=""><%= "#{tv_details['original_name']}" %></h2></header>
       <p class="w3-bold"><%= "Vote Avg: #{vote_average}" %></p>
       <p class="w3-bold"><%= "Network: #{network}" %></p>
       <p class="w3-bold"><%= "Seasons: #{seasons}" %></p>
+      <article>
+        <p class="w3-justify"><%= tv_details["overview"] %></p>
+      </article>
     </aside>
-    <article>
-      <p class="w3-justify"><%= tv_details["overview"] %></p>
-    </article>
     <nav>
       <p><%= link_to "Back", :back  , class: 'w3-btn w3-btn-info w3-btn-lg w3-border w3-border-green w3-hover-green' %></p>
     </nav>
