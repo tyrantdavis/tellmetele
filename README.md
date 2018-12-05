@@ -5,6 +5,7 @@ A tv searching app that helps you find and review details about the most popular
   [The MovieDb](https://developers.themoviedb.org/3/getting-started) API.
 
 ---
+[TellMeTele Demo](https://tellmetele.herokuapp.com/)
 ## Simple to use
 ![image](https://user-images.githubusercontent.com/14861025/49530421-d00e5200-f87d-11e8-803b-ea1a2d72be9e.png)
 
